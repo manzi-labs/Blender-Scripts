@@ -27,7 +27,10 @@ if obj is None:
 else:
     # Remove meshes related to 'Body' and 'Face'
     for mesh in obj.children:
-        if mesh.type == 'MESH' and any(target in mesh.name for target in target_meshes):
+        if mesh.name == 'secondary':
+            bpy.data.objects.remove(mesh, do_unlink=True)
+            
+        elif mesh.type == 'MESH' and any(target in mesh.name for target in target_meshes):
             print(f"Removing mesh: {mesh.name}")
             bpy.data.objects.remove(mesh, do_unlink=True)
 
